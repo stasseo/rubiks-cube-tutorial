@@ -554,6 +554,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </section>
 
+    <section class="content-section">
+    <div class="container">
+        <h2>🎮 Додаткові ігри</h2>
+        <p style="text-align:center; font-size:1.1rem; margin-bottom:3rem;">
+            Відпочиньте після складання кубіка та пограйте в прості браузерні ігри 🎯
+        </p>
+
+        <div class="steps-grid">
+
+            <!-- TETRIS -->
+            <div class="step-card">
+                <h3>🧱 Тетріс</h3>
+                <canvas id="tetris" width="240" height="400" style="background:#111; display:block; margin:auto;"></canvas>
+                <p style="text-align:center; margin-top:1rem;">
+                    ⬅ ➡ ⬇ — рух<br>⬆ — обертання
+                </p>
+            </div>
+
+            <!-- PONG -->
+            <div class="step-card">
+                <h3>🏓 Настільний теніс</h3>
+                <canvas id="pong" width="400" height="250" style="background:#000; display:block; margin:auto;"></canvas>
+                <p style="text-align:center; margin-top:1rem;">
+                    W / S — керування
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
     <section class="cta-section">
         <div class="container">
             <h2>Готові Почати Складати Кубік Рубік?</h2>
@@ -735,3 +766,130 @@ function toggleFAQ(el) {
     el.classList.toggle('active');
 }
 </script>
+    <script>
+// =====================
+// 🎮 TETRIS
+// =====================
+const tetrisCanvas = document.getElementById('tetris');
+const tCtx = tetrisCanvas.getContext('2d');
+tCtx.scale(20, 20);
+
+const arena = Array.from({ length: 20 }, () => Array(12).fill(0));
+
+const pieces = {
+    T: [[0,1,0],[1,1,1]],
+    O: [[1,1],[1,1]],
+    L: [[0,0,1],[1,1,1]],
+    J: [[1,0,0],[1,1,1]],
+    I: [[1,1,1,1]],
+    S: [[0,1,1],[1,1,0]],
+    Z: [[1,1,0],[0,1,1]]
+};
+
+function createPiece(type) {
+    return pieces[type];
+}
+
+const player = {
+    pos: { x: 5, y: 0 },
+    matrix: createPiece('T')
+};
+
+function collide(arena, player) {
+    return player.matrix.some((row, y) =>
+        row.some((value, x) =>
+            value && arena[y + player.pos.y]?.[x + player.pos.x] !== 0
+        )
+    );
+}
+
+function merge(arena, player) {
+    player.matrix.forEach((row, y) =>
+        row.forEach((value, x) => {
+            if (value) arena[y + player.pos.y][x + player.pos.x] = 1;
+        })
+    );
+}
+
+function rotate(matrix) {
+    return matrix[0].map((_, i) => matrix.map(row => row[i]).reverse());
+}
+
+function drawMatrix(matrix, offset) {
+    matrix.forEach((row, y) =>
+        row.forEach((value, x) => {
+            if (value) {
+                tCtx.fillStyle = '#f5576c';
+                tCtx.fillRect(x + offset.x, y + offset.y, 1, 1);
+            }
+        })
+    );
+}
+
+function drawTetris() {
+    tCtx.fillStyle = '#111';
+    tCtx.fillRect(0, 0, tetrisCanvas.width, tetrisCanvas.height);
+    drawMatrix(arena, {x:0,y:0});
+    drawMatrix(player.matrix, player.pos);
+}
+
+function drop() {
+    player.pos.y++;
+    if (collide(arena, player)) {
+        player.pos.y--;
+        merge(arena, player);
+        player.pos.y = 0;
+    }
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') player.pos.x--;
+    if (e.key === 'ArrowRight') player.pos.x++;
+    if (e.key === 'ArrowDown') drop();
+    if (e.key === 'ArrowUp') player.matrix = rotate(player.matrix);
+});
+
+setInterval(() => {
+    drop();
+    drawTetris();
+}, 500);
+
+
+// =====================
+// 🏓 PONG
+// =====================
+const pong = document.getElementById('pong');
+const pCtx = pong.getContext('2d');
+
+let paddleY = 100;
+let ball = { x: 200, y: 125, vx: 4, vy: 4 };
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'w') paddleY -= 20;
+    if (e.key === 's') paddleY += 20;
+});
+
+function drawPong() {
+    pCtx.fillStyle = '#000';
+    pCtx.fillRect(0, 0, pong.width, pong.height);
+
+    // paddle
+    pCtx.fillStyle = '#fff';
+    pCtx.fillRect(10, paddleY, 10, 60);
+
+    // ball
+    pCtx.beginPath();
+    pCtx.arc(ball.x, ball.y, 6, 0, Math.PI * 2);
+    pCtx.fill();
+
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+
+    if (ball.y < 0 || ball.y > pong.height) ball.vy *= -1;
+    if (ball.x < 20 && ball.y > paddleY && ball.y < paddleY + 60) ball.vx *= -1;
+    if (ball.x > pong.width) ball = { x:200, y:125, vx:4, vy:4 };
+}
+
+setInterval(drawPong, 30);
+</script>
+
