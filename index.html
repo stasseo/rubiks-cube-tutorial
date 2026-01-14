@@ -1,738 +1,457 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-T6SF5BF2');</script>
-<!-- End Google Tag Manager -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Як Скласти Кубік Рубіка 3х3 - Повний Гід для Початківців 2025</title>
-    <meta name="description" content="Навчіться складати кубік рубік 3х3 за простою покроковою інструкцією. Інтерактивний 3D симулятор, відео уроки та найкращі методи для початківців. Зложіть кубік рубіка за 5 хвилин!">
-    <meta name="keywords" content="як скласти кубік рубіка, як складати кубік рубік, як зложити кубік рубік, як навчитися складати кубік рубік, кубік рубіка 3х3, як скласти кубік рубік 3 на 3">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сучасний Лендінг — Реєстрація та Заявки</title>
+  <meta name="description" content="Візуально привабливий лендінг з формами реєстрації та заявок. Адаптивний дизайн, анімації, модальні вікна та валідація форм." />
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow-x: hidden;
-        }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
+  <style>
+    /* ============ RESET ============ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: #f9fafb;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
 
-        .hero-content {
-            max-width: 1200px;
-            position: relative;
-            z-index: 1;
-        }
+    /* ============ VARIABLES ============ */
+    :root {
+      --primary: #6366f1;
+      --secondary: #22c55e;
+      --accent: #06b6d4;
+      --bg-card: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.1);
+      --blur: blur(12px);
+    }
 
-        h1 {
-            font-size: 3.5rem;
-            color: white;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: fadeInDown 1s ease-out;
-        }
+    /* ============ GLOBAL ============ */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .btn {
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 3rem;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(99,102,241,0.4);
+    }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(99,102,241,0.6);
+    }
 
-        .cube-container {
-            width: 100%;
-            max-width: 500px;
-            height: 500px;
-            margin: 0 auto 2rem;
-            perspective: 1000px;
-            animation: fadeIn 1s ease-out 0.6s both;
-        }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: #e5e7eb;
+      backdrop-filter: var(--blur);
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.05);
+    }
 
-        #cubeCanvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
+    .glass {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: var(--blur);
+      border-radius: 20px;
+    }
 
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
+    /* ============ HEADER ============ */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(2,6,23,0.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
 
-        .btn {
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
+    .logo {
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
 
-        .btn-secondary {
-            background: white;
-            color: #667eea;
-        }
+    .nav-links a {
+      font-size: 14px;
+      color: #cbd5e1;
+      transition: color 0.2s;
+    }
 
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
+    .nav-links a:hover { color: #fff; }
 
-        .content-section {
-            background: white;
-            padding: 5rem 2rem;
-        }
+    /* ============ HERO ============ */
+    .hero {
+      padding: 160px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
 
-        h2 {
-            font-size: 2.5rem;
-            color: ##764ba2;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #fff, #c7d2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        h3 {
-            font-size: 1.8rem;
-            color: #764ba2;
-            margin: 2rem 0 1rem;
-        }
+    .hero p {
+      font-size: 18px;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin-bottom: 36px;
+    }
 
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
 
-        .step-card {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
+    .hero-card {
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .step-card:hover {
-            transform: translateY(-10px);
-        }
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: radial-gradient(circle at center, rgba(99,102,241,0.15), transparent 70%);
+      z-index: 0;
+    }
 
-        .step-number {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 50px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
+    .hero-card > * { position: relative; z-index: 1; }
 
-        .tips-section {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            padding: 5rem 2rem;
-        }
+    /* ============ FEATURES ============ */
+    .section {
+      padding: 100px 0;
+    }
 
-        .tip-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 1rem 0;
-            border-left: 5px solid #f5576c;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
 
-        .faq-section {
-            background: #f8f9fa;
-            padding: 5rem 2rem;
-        }
+    .section-title h2 {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
 
-        .faq-item {
-            background: white;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    .section-title p {
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-        .faq-item:hover {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
 
-        .faq-question {
-            font-weight: bold;
-            color: #667eea;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .feature-card {
+      padding: 36px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-        .faq-answer {
-            margin-top: 1rem;
-            display: none;
-            color: #666;
-        }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
 
-        .faq-item.active .faq-answer {
-            display: block;
-        }
+    /* ============ FORMS ============ */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
 
-        .cta-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 5rem 2rem;
-            text-align: center;
-        }
+    label {
+      font-size: 14px;
+      color: #cbd5e1;
+    }
 
-        footer {
-            background: #2d3436;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
+    input, textarea {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
+    input:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+    }
 
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
+    /* ============ MODAL ============ */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 20px;
+    }
 
-            .cube-container {
-                height: 300px;
-            }
+    .modal.active { display: flex; }
 
-            h2 {
-                font-size: 2rem;
-            }
+    .modal-content {
+      width: 100%;
+      max-width: 520px;
+      padding: 40px;
+      position: relative;
+    }
 
-            .steps-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+    .close-modal {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #94a3b8;
+      cursor: pointer;
+    }
 
-        .notation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+    /* ============ FOOTER ============ */
+    footer {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      color: #94a3b8;
+      text-align: center;
+    }
 
-        .notation-table th,
-        .notation-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .notation-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .notation-table tr:hover {
-            background: #f5f7fa;
-        }
-    </style>
-    <meta name="google-site-verification" content="9DXCMo_jm0UHslaX8GvdWUSjteOIEtl_Zgn3uALMh9E" />
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T6SF5BF2"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Як Скласти Кубік Рубіка 3х3</h1>
-            <p class="hero-subtitle">Навчіться складати кубік рубік за простою покроковою інструкцією</p>
-            
-            <div class="cube-container">
-                <canvas id="cubeCanvas"></canvas>
-            </div>
 
-            <div class="controls">
-                <button class="btn btn-primary" onclick="scrambleCube()">Перемішати</button>
-                <button class="btn btn-secondary" onclick="resetCube()">Скинути</button>
-                <button class="btn btn-secondary" onclick="autoRotate = !autoRotate">Обертання</button>
-            </div>
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+      <div class="logo">LandingPro</div>
+      <nav class="nav-links">
+        <a href="#features">Можливості</a>
+        <a href="#about">Про нас</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+      <button class="btn btn-outline" id="openModal">Реєстрація</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Сучасний лендінг для залучення клієнтів</h1>
+        <p>Готовий адаптивний HTML/CSS/JS шаблон з формами, модальними вікнами, анімаціями та UX, який можна легко підключити до бекенду.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="openModal2">Зареєструватися</button>
+          <a href="#contact" class="btn btn-outline">Дізнатися більше</a>
         </div>
-    </section>
+      </div>
+      <div class="hero-card glass">
+        <h3 style="margin-bottom:16px">Залишити заявку</h3>
+        <form id="quickForm">
+          <div class="form-group">
+            <label>Ім'я</label>
+            <input type="text" required placeholder="Ваше ім'я">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" required placeholder="you@email.com">
+          </div>
+          <button class="btn btn-primary" type="submit">Надіслати заявку</button>
+          <p id="quickMsg" style="margin-top:12px;font-size:14px;color:#22c55e;display:none">Заявка успішно надіслана ✓</p>
+        </form>
+      </div>
+    </div>
+  </section>
 
-    <section class="content-section">
-        <div class="container">
-            <h2>Як Навчитися Складати Кубік Рубік - Покрокова Інструкція</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">
-                Складання кубіка Рубіка здається складним завданням, але з правильним підходом ви зможете зложити кубік рубік за лічені хвилини. Наша інтерактивна інструкція допоможе вам навчитися складати кубік рубік 3х3 навіть якщо ви ніколи цього не робили!
-            </p>
-
-            <h3>Що Таке Кубік Рубіка?</h3>
-            <p>Кубік Рубіка - це тривимірна головоломка, винайдена угорським скульптором та професором архітектури Ерно Рубіком у 1974 році. Класичний кубік рубік 3х3 складається з 26 маленьких кубиків, які можна обертати навколо центральної осі. Мета гри - зібрати кубік так, щоб кожна грань була одного кольору.</p>
-
-            <div class="steps-grid">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3>Білий Хрест</h3>
-                    <p>Перший крок у складанні кубіка рубіка - створення білого хреста на верхній грані. Знайдіть білі ребра та розташуйте їх так, щоб вони відповідали кольорам центральних кубиків на бокових гранях.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3>Білі Кути</h3>
-                    <p>Після створення білого хреста, розташуйте білі кутові кубики на свої місця. Переконайтеся, що кольори на кутах відповідають кольорам на бокових гранях.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3>Другий Шар</h3>
-                    <p>Зберіть середній шар кубіка, розташувавши ребра без жовтого кольору. Використовуйте спеціальні алгоритми для переміщення ребер ліворуч або праворуч.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3>Жовтий Хрест</h3>
-                    <p>Створіть жовтий хрест на верхній грані. Не хвилюйтеся про те, чи збігаються бокові кольори - зараз важливо лише створити хрест з жовтого кольору.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">5</div>
-                    <h3>Жовті Ребра</h3>
-                    <p>Розташуйте жовті ребра так, щоб вони відповідали кольорам центральних кубиків на бокових гранях. Це дозволить правильно завершити збірку кубіка.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">6</div>
-                    <h3>Жовті Кути</h3>
-                    <p>Розташуйте жовті кутові кубики на правильні позиції, не звертаючи уваги на їх орієнтацію. Потім поверніть кути, щоб завершити збірку кубіка рубіка!</p>
-                </div>
-            </div>
-
-            <h3>Нотація Ходів Кубіка Рубіка</h3>
-            <p>Для того, щоб навчитися складати кубік рубік 3 на 3, важливо розуміти нотацію ходів:</p>
-            
-            <table class="notation-table">
-                <thead>
-                    <tr>
-                        <th>Символ</th>
-                        <th>Значення</th>
-                        <th>Опис</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>R</strong></td>
-                        <td>Right (Правий)</td>
-                        <td>Поворот правої грані за годинниковою стрілкою</td>
-                    </tr>
-                    <tr>
-                        <td><strong>L</strong></td>
-                        <td>Left (Лівий)</td>
-                        <td>Поворот лівої грані за годинниковою стрілкою</td>
-                    </tr>
-                    <tr>
-                        <td><strong>U</strong></td>
-                        <td>Up (Верх)</td>
-                        <td>Поворот верхньої грані за годинниковою стрілкою</td>
-                    </tr>
-                    <tr>
-                        <td><strong>D</strong></td>
-                        <td>Down (Низ)</td>
-                        <td>Поворот нижньої грані за годинниковою стрілкою</td>
-                    </tr>
-                    <tr>
-                        <td><strong>F</strong></td>
-                        <td>Front (Передня)</td>
-                        <td>Поворот передньої грані за годинниковою стрілкою</td>
-                    </tr>
-                    <tr>
-                        <td><strong>B</strong></td>
-                        <td>Back (Задня)</td>
-                        <td>Поворот задньої грані за годинниковою стрілкою</td>
-                    </tr>
-                    <tr>
-                        <td><strong>'</strong></td>
-                        <td>Прим</td>
-                        <td>Поворот проти годинникової стрілки (наприклад, R')</td>
-                    </tr>
-                    <tr>
-                        <td><strong>2</strong></td>
-                        <td>Подвійний</td>
-                        <td>Два повороти (180°) тієї ж грані (наприклад, R2)</td>
-                    </tr>
-                </tbody>
-            </table>
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Чому цей лендінг працює</h2>
+        <p>Оптимізований дизайн, психологія UX та сучасні технології для максимальної конверсії.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card glass">
+          <h3>🚀 Швидкість</h3>
+          <p>Чистий код без зайвих бібліотек, швидке завантаження.</p>
         </div>
-    </section>
-
-    <section class="tips-section">
-        <div class="container">
-            <h2>Корисні Поради: Як Швидко Скласти Кубік Рубік</h2>
-            
-            <div class="tip-box">
-                <h3>💡 Практикуйтеся Регулярно</h3>
-                <p>Найкращий спосіб навчитися складати кубік рубік - це практика. Почніть з повільного складання, концентруючись на запам'ятовуванні алгоритмів. З часом швидкість прийде природно.</p>
-            </div>
-
-            <div class="tip-box">
-                <h3>🎯 Вивчіть Основні Алгоритми</h3>
-                <p>Існує близько 78 алгоритмів для повного методу складання кубіка рубіка (метод CFOP), але початківцям достатньо знати 6-8 базових алгоритмів, щоб скласти кубік рубік 3х3.</p>
-            </div>
-
-            <div class="tip-box">
-                <h3>⚡ Починайте з Методу для Початківців</h3>
-                <p>Метод для початківців (Layer-by-Layer) - найпростіший спосіб навчитися складати кубік рубік. Він дозволяє зложити кубік за 1-2 хвилини після кількох тижнів практики.</p>
-            </div>
-
-            <div class="tip-box">
-                <h3>🔄 Використовуйте Якісний Кубік</h3>
-                <p>Якісний кубік рубік обертається плавно і не заїдає. Це значно полегшує процес навчання та робить складання приємнішим. Рекомендуємо кубіки від виробників MoYu, GAN або QiYi.</p>
-            </div>
-
-            <div class="tip-box">
-                <h3>📱 Використовуйте Наш 3D Симулятор</h3>
-                <p>Тренуйтеся на інтерактивному 3D кубіку вище на сторінці. Ви можете обертати його мишкою, перемішувати та практикувати алгоритми без фізичного кубіка.</p>
-            </div>
+        <div class="feature-card glass">
+          <h3>📱 Адаптивність</h3>
+          <p>Ідеально виглядає на мобільних, планшетах і десктопах.</p>
         </div>
-    </section>
-
-    <section class="faq-section">
-        <div class="container">
-            <h2>Часті Запитання Про Складання Кубіка Рубіка</h2>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    Скільки часу потрібно, щоб навчитися складати кубік рубік?
-                    <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Більшість людей можуть навчитися складати кубік рубік 3х3 за 1-2 тижні регулярної практики. Перше складання може зайняти годину, але з практикою ви зможете складати кубік за 1-2 хвилини.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    Який найпростіший метод для початківців?
-                    <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Метод Layer-by-Layer (пошарове складання) - найпростіший для початківців. Він передбачає складання кубіка шар за шаром, починаючи з білого хреста і закінчуючи жовтою гранню.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    Чи можна зложити кубік рубік без формул?
-                    <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Теоретично так, але це надзвичайно складно. Використання алгоритмів (формул) - це найефективніший спосіб складати кубік рубік. Вони дозволяють змінювати позицію кубиків, не руйнуючи вже зібрані частини.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    Який світовий рекорд складання кубіка рубіка?
-                    <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Станом на 2025 рік, світовий рекорд складання кубіка рубіка 3х3 становить менше 4 секунд. Однак для початківців цілком нормально складати кубік за 2-3 хвилини.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    Що робити, якщо я застряг на певному етапі?
-                    <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Використовуйте наш інтерактивний 3D симулятор для практики. Також рекомендуємо переглянути відео-уроки та повторити алгоритми. Пам'ятайте, що практика - ключ до успіху!
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    Скільки комбінацій має кубік рубік 3х3?
-                    <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Кубік рубік 3х3 має приблизно 43 квінтильйони можливих комбінацій (43,252,003,274,489,856,000). Це більше, ніж зірок у нашій галактиці!
-                </div>
-            </div>
+        <div class="feature-card glass">
+          <h3>🎯 Конверсія</h3>
+          <p>Продумані форми, кнопки дії та структура сторінки.</p>
         </div>
-    </section>
-
-    <section class="cta-section">
-        <div class="container">
-            <h2>Готові Почати Складати Кубік Рубік?</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
-                Використовуйте наш інтерактивний 3D симулятор вгорі сторінки, щоб практикувати алгоритми та навчитися складати кубік рубік 3 на 3 прямо зараз!
-            </p>
-            <button class="btn btn-primary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                Спробувати Зараз
-            </button>
+        <div class="feature-card glass">
+          <h3>⚙️ Гнучкість</h3>
+          <p>Легко підключається до будь-якого бекенду або CRM.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Як Скласти Кубік Рубіка. Всі права захищені.</p>
-            <p>Навчіться складати кубік рубік з найкращим онлайн-гідом!</p>
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>Дізнатися більше</h2>
+        <p>Залиште повідомлення і ми зв'яжемось з вами.</p>
+      </div>
+      <div class="glass" style="max-width:700px;margin:0 auto;padding:40px">
+        <form id="contactForm">
+          <div class="form-group">
+            <label>Ім'я</label>
+            <input type="text" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" required>
+          </div>
+          <div class="form-group">
+            <label>Повідомлення</label>
+            <textarea rows="4" required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Надіслати</button>
+          <p id="contactMsg" style="margin-top:12px;font-size:14px;color:#22c55e;display:none">Повідомлення відправлено ✓</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      © 2026 LandingPro. Всі права захищені.
+    </div>
+  </footer>
+
+  <!-- MODAL REGISTRATION -->
+  <div class="modal" id="modal">
+    <div class="modal-content glass">
+      <button class="close-modal" id="closeModal">×</button>
+      <h2 style="margin-bottom:20px">Реєстрація</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label>Ім'я</label>
+          <input type="text" required>
         </div>
-    </footer>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" required>
+        </div>
+        <div class="form-group">
+          <label>Пароль</label>
+          <input type="password" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Створити акаунт</button>
+        <p id="registerMsg" style="margin-top:12px;font-size:14px;color:#22c55e;display:none">Реєстрація успішна ✓</p>
+      </form>
+    </div>
+  </div>
 
-    <script>
-const canvas = document.getElementById('cubeCanvas');
-const ctx = canvas.getContext('2d');
+  <script>
+    // Modal logic
+    const modal = document.getElementById('modal');
+    document.getElementById('openModal').onclick = () => modal.classList.add('active');
+    document.getElementById('openModal2').onclick = () => modal.classList.add('active');
+    document.getElementById('closeModal').onclick = () => modal.classList.remove('active');
 
-function resizeCanvas() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('click', e => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
 
-let autoRotate = true;
-let rotationX = 25;
-let rotationY = 35;
-let isDragging = false;
-let lastX = 0;
-let lastY = 0;
+    // Fake submit handlers
+    function handleForm(formId, msgId) {
+      const form = document.getElementById(formId);
+      const msg = document.getElementById(msgId);
 
-const cubeSize = 60;
-const gap = 4;
-
-const colors = [
-    '#FFFFFF', // white
-    '#FFD700', // yellow
-    '#FF0000', // red
-    '#FF8C00', // orange
-    '#0000FF', // blue
-    '#00FF00'  // green
-];
-
-// початковий стан
-let cubeState;
-
-function resetCube() {
-    cubeState = Array.from({ length: 6 }, (_, f) =>
-        Array.from({ length: 3 }, () =>
-            Array.from({ length: 3 }, () => f)
-        )
-    );
-}
-resetCube();
-
-function getCubePosition(face, i, j) {
-    const o = cubeSize;
-    const map = [
-        { x:(j-1)*o, y: o*1.5, z:(i-1)*o },   // up
-        { x:(j-1)*o, y:-o*1.5, z:(i-1)*o },   // down
-        { x: o*1.5, y:(j-1)*o, z:(i-1)*o },   // right
-        { x:-o*1.5, y:(j-1)*o, z:(i-1)*o },   // left
-        { x:(j-1)*o, y:(i-1)*o, z: o*1.5 },   // front
-        { x:(j-1)*o, y:(i-1)*o, z:-o*1.5 }    // back
-    ];
-    return map[face];
-}
-
-function rotate(pos, rx, ry) {
-    const radX = rx * Math.PI / 180;
-    const radY = ry * Math.PI / 180;
-
-    let y = pos.y * Math.cos(radX) - pos.z * Math.sin(radX);
-    let z = pos.y * Math.sin(radX) + pos.z * Math.cos(radX);
-    let x = pos.x * Math.cos(radY) + z * Math.sin(radY);
-    z = -pos.x * Math.sin(radY) + z * Math.cos(radY);
-
-    return { x, y, z };
-}
-
-function drawCube() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
-    const faces = [];
-
-    for (let f = 0; f < 6; f++) {
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                const pos = rotate(
-                    getCubePosition(f, i, j),
-                    rotationX,
-                    rotationY
-                );
-
-                faces.push({
-                    z: pos.z,
-                    draw() {
-                        const size = cubeSize - gap;
-                        const x = cx + pos.x * 2;
-                        const y = cy - pos.y * 2;
-
-                        ctx.fillStyle = colors[cubeState[f][i][j]];
-                        ctx.strokeStyle = '#000';
-                        ctx.lineWidth = 2;
-
-                        ctx.fillRect(x - size/2, y - size/2, size, size);
-                        ctx.strokeRect(x - size/2, y - size/2, size, size);
-                    }
-                });
-            }
-        }
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        msg.style.display = 'block';
+        form.reset();
+      });
     }
 
-    faces.sort((a,b)=>a.z-b.z);
-    faces.forEach(f=>f.draw());
-}
+    handleForm('quickForm', 'quickMsg');
+    handleForm('contactForm', 'contactMsg');
+    handleForm('registerForm', 'registerMsg');
+  </script>
 
-function animate() {
-    if (autoRotate) rotationY += 0.3;
-    drawCube();
-    requestAnimationFrame(animate);
-}
-animate();
-
-function scrambleCube() {
-    for (let f = 0; f < 6; f++) {
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                cubeState[f][i][j] = Math.floor(Math.random() * 6);
-            }
-        }
-    }
-}
-
-// 🖱️ drag rotation
-canvas.addEventListener('mousedown', e => {
-    isDragging = true;
-    lastX = e.clientX;
-    lastY = e.clientY;
-});
-
-window.addEventListener('mouseup', () => isDragging = false);
-
-window.addEventListener('mousemove', e => {
-    if (!isDragging) return;
-    rotationY += (e.clientX - lastX) * 0.4;
-    rotationX += (e.clientY - lastY) * 0.4;
-    lastX = e.clientX;
-    lastY = e.clientY;
-});
-
-// 📱 touch
-canvas.addEventListener('touchstart', e => {
-    isDragging = true;
-    lastX = e.touches[0].clientX;
-    lastY = e.touches[0].clientY;
-});
-
-canvas.addEventListener('touchmove', e => {
-    if (!isDragging) return;
-    rotationY += (e.touches[0].clientX - lastX) * 0.4;
-    rotationX += (e.touches[0].clientY - lastY) * 0.4;
-    lastX = e.touches[0].clientX;
-    lastY = e.touches[0].clientY;
-});
-
-canvas.addEventListener('touchend', () => isDragging = false);
-
-// ❓ FAQ
-function toggleFAQ(el) {
-    el.classList.toggle('active');
-}
-</script>
-   
+</body>
+</html>
