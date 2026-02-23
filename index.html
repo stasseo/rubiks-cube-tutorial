@@ -13,28 +13,31 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Лайтовий сайтик</title>
-  <meta name="description" content="Легкий, сучасний односторінковий сайт на HTML/CSS/JS." />
+  <title>Лайтовий сайтик — повноцінний дизайн</title>
+  <meta name="description" content="Сучасний односторінковий сайт з повноцінним дизайном, анімаціями, адаптивом і дрібними UX-фішками. Один HTML-файл." />
 
   <style>
     :root{
-      --bg: #070A12;
+      --bg0:#070A12;
+      --bg1:#0A0F1B;
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.55);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.56);
       --line: rgba(255,255,255,.12);
 
-      --accentA: #8B5CF6;
-      --accentB: #22C55E;
-      --accentC: #06B6D4;
+      --a:#8B5CF6; /* purple */
+      --b:#22C55E; /* green */
+      --c:#06B6D4; /* cyan */
+      --d:#F59E0B; /* amber */
 
       --glass: rgba(255,255,255,.06);
       --glass2: rgba(255,255,255,.10);
 
-      --shadow: 0 22px 70px rgba(0,0,0,.55);
-      --radius: 20px;
+      --shadow: 0 26px 80px rgba(0,0,0,.58);
+      --shadow2: 0 18px 55px rgba(0,0,0,.40);
+      --r: 22px;
 
-      --container: min(1100px, 92vw);
+      --container: min(1140px, 92vw);
     }
 
     *{ box-sizing:border-box; }
@@ -43,63 +46,73 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
-      background: var(--bg);
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(139,92,246,.18), transparent 55%),
+                  radial-gradient(1200px 600px at 85% 25%, rgba(6,182,212,.16), transparent 55%),
+                  radial-gradient(1200px 600px at 70% 95%, rgba(34,197,94,.12), transparent 55%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
 
-    /* BG */
-    .bg{ position:fixed; inset:0; z-index:-1; overflow:hidden; }
+    /* utils */
+    .container{ width: var(--container); margin:0 auto; }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+
+    /* background layer */
+    .bg{
+      position:fixed; inset:0; z-index:-1; overflow:hidden;
+    }
     .grid{
       position:absolute; inset:-40%;
       background:
-        linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255,255,255,.055) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.055) 1px, transparent 1px);
       background-size: 56px 56px;
       transform: rotate(10deg);
-      opacity:.16;
+      opacity:.14;
+      filter: blur(.15px);
     }
     .blob{
       position:absolute;
-      width: 600px; height: 600px;
-      filter: blur(70px);
-      opacity:.35;
+      width: 640px; height: 640px;
       border-radius: 999px;
-      animation: floaty 10s ease-in-out infinite;
+      filter: blur(74px);
+      opacity:.34;
+      animation: floaty 11s ease-in-out infinite;
     }
-    .b1{
-      left:-180px; top:-150px;
-      background: radial-gradient(circle at 30% 30%, var(--accentA), transparent 60%);
-      animation-delay: -2s;
-    }
-    .b2{
-      right:-190px; bottom:-160px;
-      background: radial-gradient(circle at 30% 30%, var(--accentB), transparent 60%);
-      animation-delay: -5s;
-    }
+    .b1{ left:-220px; top:-180px; background: radial-gradient(circle at 30% 30%, var(--a), transparent 60%); animation-delay:-2s; }
+    .b2{ right:-220px; bottom:-180px; background: radial-gradient(circle at 30% 30%, var(--b), transparent 60%); animation-delay:-5s; }
     .b3{
       left: 55%;
-      top: 45%;
+      top: 46%;
       transform: translate(-50%,-50%);
       width: 520px; height:520px;
-      background: radial-gradient(circle at 30% 30%, var(--accentC), transparent 60%);
-      opacity:.20;
-      animation-delay: -7s;
+      opacity:.18;
+      background: radial-gradient(circle at 30% 30%, var(--c), transparent 60%);
+      animation-delay:-7s;
     }
     @keyframes floaty{
       0%,100%{ transform: translate3d(0,0,0) scale(1); }
       50%{ transform: translate3d(0,-18px,0) scale(1.02); }
     }
 
-    /* container */
-    .container{ width: var(--container); margin:0 auto; }
+    /* top progress bar */
+    .progress{
+      position:fixed; top:0; left:0; height:2px; width:0%;
+      background: linear-gradient(90deg, var(--a), var(--c), var(--b));
+      z-index: 50;
+      box-shadow: 0 0 18px rgba(139,92,246,.35);
+    }
 
     /* header */
     .header{
       position:sticky; top:0;
-      z-index:20;
-      backdrop-filter: blur(14px);
-      background: rgba(7,10,18,.55);
-      border-bottom: 1px solid var(--line);
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(8,10,18,.55);
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
@@ -109,28 +122,36 @@
     .logo{
       display:flex; align-items:center; gap:10px;
       text-decoration:none; color:var(--text);
-      font-weight: 820; letter-spacing:.2px;
+      font-weight: 900; letter-spacing:.2px;
       user-select:none;
     }
     .logo-dot{
       width: 12px; height:12px; border-radius:50%;
-      background: linear-gradient(135deg, var(--accentA), var(--accentB));
+      background: linear-gradient(135deg, var(--a), var(--b));
       box-shadow: 0 0 0 4px rgba(139,92,246,.16);
     }
 
-    .menu{ display:flex; align-items:center; gap:18px; }
+    .menu{ display:flex; align-items:center; gap: 8px; }
     .menu a{
       color: var(--muted);
       text-decoration:none;
-      font-weight: 650;
+      font-weight: 700;
       font-size: 14px;
-      padding: 10px 10px;
+      padding: 10px 12px;
       border-radius: 999px;
-      transition: background .15s ease, color .15s ease;
+      transition: background .15s ease, color .15s ease, transform .15s ease;
+      position: relative;
+      outline: none;
     }
     .menu a:hover{
       color: var(--text);
-      background: rgba(255,255,255,.05);
+      background: rgba(255,255,255,.055);
+      transform: translateY(-1px);
+    }
+    .menu a.active{
+      color: var(--text);
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
     }
 
     .btn{
@@ -138,16 +159,17 @@
       padding: 12px 16px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.16);
-      background: linear-gradient(135deg, rgba(139,92,246,.95), rgba(34,197,94,.88));
+      background: linear-gradient(135deg, rgba(139,92,246,.95), rgba(6,182,212,.82), rgba(34,197,94,.85));
       color: #0b0f18;
-      font-weight: 900;
+      font-weight: 950;
       text-decoration:none;
       box-shadow: 0 12px 38px rgba(139,92,246,.18);
       cursor:pointer;
       transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
       will-change: transform;
+      white-space: nowrap;
     }
-    .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); box-shadow: 0 16px 54px rgba(139,92,246,.22); }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.04); box-shadow: 0 18px 62px rgba(139,92,246,.22); }
     .btn:active{ transform: translateY(0px); }
     .btn.small{ padding: 10px 14px; font-size: 14px; }
     .btn.ghost{
@@ -156,12 +178,18 @@
       box-shadow:none;
     }
     .btn.ghost:hover{ background: rgba(255,255,255,.09); }
+    .btn.dark{
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      box-shadow:none;
+      border: 1px solid rgba(255,255,255,.14);
+    }
 
     .burger{
       display:none;
       width: 46px; height: 40px;
       border-radius: 14px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       cursor:pointer;
       transition: background .15s ease, transform .15s ease;
@@ -170,9 +198,10 @@
     .burger span{
       display:block;
       height:2px; margin:7px 11px;
-      background: rgba(255,255,255,.80);
+      background: rgba(255,255,255,.82);
       border-radius: 2px;
     }
+
     .mobile{
       padding: 10px 0 16px;
       display:grid;
@@ -181,32 +210,19 @@
     .mobile a{
       padding: 12px 14px;
       border-radius: 16px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       text-decoration:none;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 800;
     }
     .mobile a:hover{ color: var(--text); background: rgba(255,255,255,.06); }
 
     /* hero */
     .hero{
-      padding: 64px 0 26px;
+      padding: 66px 0 26px;
       position:relative;
     }
-    .hero::after{
-      content:"";
-      position:absolute;
-      left: 50%;
-      top: 14%;
-      width: 880px;
-      height: 260px;
-      transform: translateX(-50%);
-      background: radial-gradient(closest-side, rgba(139,92,246,.16), transparent 70%);
-      filter: blur(2px);
-      pointer-events:none;
-    }
-
     .hero-grid{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
@@ -220,23 +236,23 @@
       gap:10px;
       padding: 8px 12px;
       border-radius: 999px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13px;
     }
     .pill .spark{
       width: 10px; height:10px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--accentA), var(--accentB));
+      background: linear-gradient(135deg, var(--a), var(--b));
       box-shadow: 0 0 0 4px rgba(34,197,94,.10);
     }
 
     h1{
-      font-size: clamp(34px, 4vw, 52px);
+      font-size: clamp(36px, 4.2vw, 56px);
       line-height: 1.02;
       margin: 14px 0 12px;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.8px;
     }
     .grad{
       background: linear-gradient(135deg, rgba(139,92,246,1), rgba(6,182,212,1), rgba(34,197,94,1));
@@ -248,37 +264,68 @@
       margin: 0 0 18px;
       color: var(--muted);
       font-size: 16px;
-      line-height: 1.6;
-      max-width: 54ch;
+      line-height: 1.65;
+      max-width: 58ch;
     }
-
-    .cta{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 18px; }
+    .cta{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom: 18px;
+    }
+    .trust{
+      display:flex;
+      gap: 14px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 16px;
+      color: var(--muted2);
+      font-weight: 750;
+      font-size: 13px;
+    }
+    .avatars{
+      display:flex; align-items:center;
+    }
+    .avatar{
+      width: 30px; height:30px;
+      border-radius: 999px;
+      border: 2px solid rgba(8,10,18,.8);
+      background: linear-gradient(135deg, rgba(139,92,246,.85), rgba(6,182,212,.8));
+      margin-left: -8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .avatar:nth-child(2){ background: linear-gradient(135deg, rgba(34,197,94,.85), rgba(245,158,11,.75)); }
+    .avatar:nth-child(3){ background: linear-gradient(135deg, rgba(6,182,212,.85), rgba(139,92,246,.8)); }
 
     .stats{
       display:flex; gap: 12px; flex-wrap:wrap;
+      margin-top: 16px;
     }
     .stat{
       padding: 12px 14px;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-      min-width: 140px;
+      min-width: 150px;
       position:relative;
       overflow:hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
     }
     .stat::before{
       content:"";
-      position:absolute; inset: -80px -80px auto auto;
-      width: 180px; height:180px;
-      background: radial-gradient(circle at 30% 30%, rgba(139,92,246,.22), transparent 60%);
+      position:absolute; inset: -90px -90px auto auto;
+      width: 200px; height:200px;
+      background: radial-gradient(circle at 30% 30%, rgba(139,92,246,.24), transparent 60%);
       filter: blur(4px);
+      pointer-events:none;
     }
     .stat-num{ font-size: 18px; font-weight: 950; position:relative; }
-    .stat-txt{ color: var(--muted2); font-weight: 700; font-size: 13px; position:relative; }
+    .stat-txt{ color: var(--muted2); font-weight: 800; font-size: 13px; position:relative; }
 
-    /* right card */
+    /* right: product mock card */
     .card{
-      border-radius: 24px;
+      border-radius: 26px;
       border: 1px solid rgba(255,255,255,.14);
       background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
       box-shadow: var(--shadow);
@@ -289,11 +336,11 @@
     .card::before{
       content:"";
       position:absolute; inset:-2px;
-      background: radial-gradient(circle at 20% 20%, rgba(139,92,246,.22), transparent 50%),
-                  radial-gradient(circle at 80% 30%, rgba(6,182,212,.18), transparent 55%),
-                  radial-gradient(circle at 30% 90%, rgba(34,197,94,.18), transparent 55%);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(139,92,246,.24), transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(6,182,212,.18), transparent 55%),
+        radial-gradient(circle at 30% 90%, rgba(34,197,94,.18), transparent 55%);
       z-index:-1;
-      filter: blur(0px);
     }
     .card-top{
       padding: 14px 16px;
@@ -312,7 +359,7 @@
       border: 1px solid rgba(255,255,255,.16);
       color: var(--muted);
       background: rgba(255,255,255,.04);
-      font-weight: 750;
+      font-weight: 850;
     }
 
     .mock{ padding: 18px 16px 10px; }
@@ -335,9 +382,9 @@
     }
     @keyframes shimmer{
       0%{ transform: translateX(-60%); }
-      50%{ transform: translateX(60%); }
-      100%{ transform: translateX(60%); }
+      60%,100%{ transform: translateX(60%); }
     }
+
     .w80{ width: 80%; }
     .w70{ width: 70%; }
     .w55{ width: 55%; }
@@ -354,11 +401,12 @@
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
-      transition: transform .18s ease, background .18s ease;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
     .mock-box:hover{
       transform: translateY(-2px);
-      background: rgba(255,255,255,.08);
+      background: rgba(255,255,255,.085);
+      border-color: rgba(255,255,255,.18);
     }
 
     .card-bottom{
@@ -374,17 +422,35 @@
       background: rgba(255,255,255,.06);
       color: var(--text);
       cursor:pointer;
-      font-weight: 850;
+      font-weight: 950;
       transition: transform .15s ease, background .15s ease;
     }
     .mini:hover{ background: rgba(255,255,255,.09); transform: translateY(-1px); }
-    .hint{ color: var(--muted2); font-size: 13px; font-weight: 700; }
+    .hint{ color: var(--muted2); font-size: 13px; font-weight: 800; }
 
     /* sections */
-    .section{ padding: 48px 0; }
-    .head{ margin-bottom: 18px; }
-    h2{ margin: 0 0 8px; font-size: 28px; letter-spacing:-0.2px; }
-    .head p{ margin: 0; color: var(--muted); line-height:1.6; }
+    .section{ padding: 54px 0; }
+    .head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    h2{
+      margin: 0 0 8px;
+      font-size: 30px;
+      letter-spacing:-0.2px;
+    }
+    .head p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 62ch;
+    }
+    .subactions{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
 
     .cards{
       display:grid;
@@ -392,19 +458,20 @@
       gap: 14px;
     }
     .feature{
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       padding: 16px;
       position:relative;
       overflow:hidden;
       transition: transform .15s ease, background .15s ease;
+      box-shadow: 0 12px 42px rgba(0,0,0,.16);
     }
     .feature::before{
       content:"";
       position:absolute; inset:-1px;
       background: radial-gradient(circle at 20% 20%, rgba(139,92,246,.18), transparent 55%);
-      opacity:.0;
+      opacity:0;
       transition: opacity .15s ease;
       pointer-events:none;
     }
@@ -413,17 +480,58 @@
       background: rgba(255,255,255,.055);
     }
     .feature:hover::before{ opacity:1; }
+
     .icon{
-      width: 44px; height:44px;
-      border-radius: 14px;
+      width: 46px; height:46px;
+      border-radius: 16px;
       display:grid; place-items:center;
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.12);
       font-size: 20px;
     }
-    .feature h3{ margin: 12px 0 8px; }
-    .feature p{ margin: 0; color: var(--muted); line-height: 1.6; }
+    .feature h3{ margin: 12px 0 8px; letter-spacing:-0.2px; }
+    .feature p{ margin: 0; color: var(--muted); line-height: 1.65; }
 
+    /* showcase band */
+    .band{
+      margin-top: 18px;
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      padding: 16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.20);
+      overflow:hidden;
+      position: relative;
+    }
+    .band::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(circle at 15% 25%, rgba(245,158,11,.14), transparent 50%),
+                  radial-gradient(circle at 85% 45%, rgba(6,182,212,.12), transparent 55%);
+      pointer-events:none;
+    }
+    .band-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items:center;
+      position:relative;
+    }
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .kpi{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      padding: 14px;
+    }
+    .kpi b{ display:block; font-size: 18px; }
+    .kpi span{ color: var(--muted2); font-weight: 750; font-size: 13px; }
+
+    /* steps */
     .steps{
       list-style:none;
       padding:0; margin: 0;
@@ -433,37 +541,90 @@
     .step{
       display:flex; gap: 14px;
       padding: 16px;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       align-items:flex-start;
+      box-shadow: 0 12px 42px rgba(0,0,0,.14);
     }
     .step-num{
-      width: 44px; height: 44px;
+      width: 46px; height: 46px;
       display:grid; place-items:center;
-      border-radius: 14px;
+      border-radius: 16px;
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.14);
       font-weight: 950;
     }
-    .step-body h3{ margin: 0 0 6px; }
-    .step-body p{ margin:0; color: var(--muted); line-height:1.6; }
+    .step-body h3{ margin: 0 0 6px; letter-spacing:-0.2px; }
+    .step-body p{ margin:0; color: var(--muted); line-height:1.65; }
 
-    .faq{
+    /* pricing */
+    .pricing{
       display:grid;
-      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
+    .price{
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      padding: 18px;
+      box-shadow: 0 18px 62px rgba(0,0,0,.18);
+      position:relative;
+      overflow:hidden;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .price:hover{ transform: translateY(-2px); background: rgba(255,255,255,.055); }
+    .price.best{
+      background: linear-gradient(180deg, rgba(139,92,246,.18), rgba(255,255,255,.04));
+      border-color: rgba(139,92,246,.35);
+    }
+    .badge{
+      display:inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-weight: 850;
+      font-size: 12px;
+    }
+    .price h3{ margin: 10px 0 6px; }
+    .money{
+      font-size: 34px;
+      font-weight: 950;
+      letter-spacing:-0.6px;
+      margin: 10px 0 10px;
+    }
+    .money small{
+      font-size: 13px;
+      color: var(--muted2);
+      font-weight: 800;
+      margin-left: 6px;
+    }
+    .list{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 700;
+    }
+    .price .btn{ width:100%; margin-top: 14px; }
+
+    /* FAQ */
+    .faq{ display:grid; gap: 10px; }
     details{
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       padding: 14px 16px;
       transition: background .15s ease;
+      box-shadow: 0 12px 40px rgba(0,0,0,.14);
     }
     details[open]{ background: rgba(255,255,255,.055); }
     summary{
       cursor:pointer;
-      font-weight: 900;
+      font-weight: 950;
       list-style:none;
     }
     summary::-webkit-details-marker{ display:none; }
@@ -478,27 +639,38 @@
     details p{
       color: var(--muted);
       margin: 10px 0 0;
-      line-height:1.6;
+      line-height:1.65;
     }
 
+    /* contact */
     .contact{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      border-radius: 26px;
+      border-radius: 28px;
       border: 1px solid rgba(255,255,255,.14);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
       padding: 18px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
     }
-    .form{
-      display:grid;
-      gap: 10px;
+    .contact::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(circle at 15% 30%, rgba(139,92,246,.20), transparent 55%),
+                  radial-gradient(circle at 85% 45%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
     }
+    .contact > *{ position:relative; }
+    .contact h2{ margin: 0 0 8px; }
+    .contact p{ margin:0; color: var(--muted); line-height:1.65; }
+
+    .form{ display:grid; gap: 10px; }
     label{
       display:grid;
       gap: 6px;
-      font-weight: 800;
+      font-weight: 850;
       color: var(--muted);
       font-size: 13px;
     }
@@ -517,23 +689,24 @@
       box-shadow: 0 0 0 4px rgba(139,92,246,.12);
       background: rgba(0,0,0,.18);
     }
-    .fineprint{ color: var(--muted2); font-size: 12px; }
+    .fineprint{ color: var(--muted2); font-size: 12px; font-weight: 700; }
 
+    /* footer */
     .footer{
-      padding: 26px 0 40px;
-      border-top: 1px solid var(--line);
-      background: rgba(0,0,0,.15);
+      padding: 26px 0 44px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
     }
     .foot{
       display:flex; align-items:center; justify-content:space-between;
       color: var(--muted2);
-      font-weight: 700;
+      font-weight: 800;
       gap: 12px;
     }
     .top{
       color: var(--muted);
       text-decoration:none;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255,255,255,.12);
       padding: 8px 10px;
       border-radius: 999px;
       background: rgba(255,255,255,.04);
@@ -548,10 +721,11 @@
       padding: 12px 14px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.16);
-      background: rgba(20,24,36,.78);
+      background: rgba(20,24,36,.80);
       backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
-      font-weight: 850;
+      box-shadow: var(--shadow2);
+      font-weight: 900;
+      z-index: 40;
     }
 
     /* reveal */
@@ -560,19 +734,19 @@
       transform: translateY(10px);
       transition: opacity .55s ease, transform .55s ease;
     }
-    .reveal.show{
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.show{ opacity: 1; transform: translateY(0); }
 
     /* responsive */
-    @media (max-width: 900px){
-      .hero{ padding-top: 54px; }
+    @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; }
       .cards{ grid-template-columns: 1fr; }
+      .pricing{ grid-template-columns: 1fr; }
+      .kpis{ grid-template-columns: 1fr; }
+      .band-grid{ grid-template-columns: 1fr; }
       .contact{ grid-template-columns: 1fr; }
       .menu{ display:none; }
       .burger{ display:block; }
+      .head{ align-items:flex-start; flex-direction:column; }
     }
 
     /* reduce motion */
@@ -581,7 +755,7 @@
       .blob{ animation:none; }
       .mock-line::after{ animation:none; }
       .reveal{ transition:none; }
-      .btn, .mini, .feature, .burger{ transition:none; }
+      .btn, .feature, .burger, .price{ transition:none; }
     }
   </style>
 </head>
@@ -594,7 +768,9 @@
   </noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div class="bg">
+  <div class="progress" id="progress"></div>
+
+  <div class="bg" aria-hidden="true">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
     <div class="blob b3"></div>
@@ -609,9 +785,11 @@
       </a>
 
       <nav class="menu" aria-label="Навігація">
-        <a href="#features">Переваги</a>
-        <a href="#process">Процес</a>
-        <a href="#faq">FAQ</a>
+        <a href="#features" data-spy="features">Переваги</a>
+        <a href="#showcase" data-spy="showcase">Кейси</a>
+        <a href="#process" data-spy="process">Процес</a>
+        <a href="#pricing" data-spy="pricing">Пакети</a>
+        <a href="#faq" data-spy="faq">FAQ</a>
         <a href="#contact" class="btn small">Контакти</a>
       </nav>
 
@@ -622,7 +800,9 @@
 
     <div class="container mobile" id="mobileMenu" hidden>
       <a href="#features">Переваги</a>
+      <a href="#showcase">Кейси</a>
       <a href="#process">Процес</a>
+      <a href="#pricing">Пакети</a>
       <a href="#faq">FAQ</a>
       <a href="#contact" class="btn small">Контакти</a>
     </div>
@@ -634,30 +814,40 @@
         <div class="hero-left reveal">
           <div class="pill"><span class="spark"></span>Швидко • Чисто • Сучасно</div>
 
-          <h1>Лайтовий сайтик, який <span class="grad">виглядає як продукт</span></h1>
+          <h1>Повноцінний <span class="grad">дизайн</span> в одному файлі</h1>
 
           <p>
-            Одна сторінка, красивий дизайн, м’які анімації та готова структура:
-            від першого екрану до контактів.
+            Сильний перший екран, секції як у продуктового лендингу, анімації, адаптив.
+            Просто збережи як <b>index.html</b> — і готово.
           </p>
 
           <div class="cta">
-            <a class="btn" href="#contact">Зробити такий самий</a>
-            <a class="btn ghost" href="#features">Подивитись секції</a>
+            <a class="btn" href="#contact">Хочу такий сайт</a>
+            <a class="btn ghost" href="#pricing">Подивитись пакети</a>
+            <button class="btn dark" id="themeBtn" type="button" aria-label="Перемкнути тему">Змінити фон</button>
+          </div>
+
+          <div class="trust">
+            <div class="avatars" aria-hidden="true">
+              <div class="avatar"></div>
+              <div class="avatar"></div>
+              <div class="avatar"></div>
+            </div>
+            <div>UX дрібниці, які роблять “дорого”</div>
           </div>
 
           <div class="stats">
             <div class="stat">
               <div class="stat-num">1</div>
-              <div class="stat-txt">сторінка</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num">0</div>
-              <div class="stat-txt">фреймворків</div>
+              <div class="stat-txt">HTML файл</div>
             </div>
             <div class="stat">
               <div class="stat-num">100%</div>
               <div class="stat-txt">адаптив</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">+</div>
+              <div class="stat-txt">анімації/UX</div>
             </div>
           </div>
         </div>
@@ -666,7 +856,7 @@
           <div class="card">
             <div class="card-top">
               <div class="dots"><span></span><span></span><span></span></div>
-              <div class="chip">Demo UI</div>
+              <div class="chip">Live preview</div>
             </div>
 
             <div class="mock">
@@ -674,12 +864,14 @@
                 <div class="mock-line w80"></div>
                 <div class="mock-line w55"></div>
               </div>
+
               <div class="mock-grid">
-                <div class="mock-box"></div>
-                <div class="mock-box"></div>
-                <div class="mock-box"></div>
-                <div class="mock-box"></div>
+                <div class="mock-box" title="Hover me"></div>
+                <div class="mock-box" title="Hover me"></div>
+                <div class="mock-box" title="Hover me"></div>
+                <div class="mock-box" title="Hover me"></div>
               </div>
+
               <div class="mock-row">
                 <div class="mock-line w70"></div>
                 <div class="mock-line w45"></div>
@@ -688,7 +880,7 @@
 
             <div class="card-bottom">
               <button class="mini" id="toastBtn" type="button">Натисни мене</button>
-              <div class="hint">Плавні ефекти + UX дрібниці</div>
+              <div class="hint">Toast + scroll spy + прогрес</div>
             </div>
           </div>
         </div>
@@ -698,82 +890,185 @@
     <section id="features" class="section">
       <div class="container">
         <div class="head reveal">
-          <h2>Переваги</h2>
-          <p>Мінімально, але не “порожньо”. Є структура, стиль і анімація.</p>
+          <div>
+            <h2>Переваги</h2>
+            <p>Це не просто шаблон. Тут є логіка: структура, блоки, акценти, чистий UI.</p>
+          </div>
+          <div class="subactions">
+            <a class="btn ghost small" href="#showcase">Перейти до кейсів</a>
+            <a class="btn small" href="#contact">Обговорити</a>
+          </div>
         </div>
 
         <div class="cards">
           <article class="feature reveal">
             <div class="icon">⚡</div>
-            <h3>Швидко запускається</h3>
-            <p>Без збірок та залежностей — відкрив файл і працює.</p>
+            <h3>Швидкий старт</h3>
+            <p>Один файл. Кинув на хостинг або GitHub Pages — і вже онлайн.</p>
           </article>
+
           <article class="feature reveal">
             <div class="icon">✨</div>
-            <h3>Виглядає дорого</h3>
-            <p>Градієнти, скло, м’які тіні, сітка — сучасний візуал.</p>
+            <h3>Преміум-візуал</h3>
+            <p>Градієнти, “скло”, тіні, типографіка — як у SaaS-лендингу.</p>
           </article>
+
           <article class="feature reveal">
-            <div class="icon">📱</div>
-            <h3>Адаптивний</h3>
-            <p>Однаково акуратно виглядає на телефоні й десктопі.</p>
+            <div class="icon">🧩</div>
+            <h3>Готова структура</h3>
+            <p>Hero → Переваги → Кейси → Процес → Пакети → FAQ → Контакти.</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section id="showcase" class="section">
+      <div class="container">
+        <div class="head reveal">
+          <div>
+            <h2>Кейси / результати</h2>
+            <p>Можеш показати “сухо”, а можеш красиво. Тут — блок для цифр, скрінів, результатів.</p>
+          </div>
+          <div class="subactions">
+            <button class="btn ghost small" id="copyBtn" type="button">Скопіювати текст для кейсу</button>
+          </div>
+        </div>
+
+        <div class="band reveal">
+          <div class="band-grid">
+            <div>
+              <h3 style="margin:0 0 8px; letter-spacing:-0.2px;">Приклад: запуск landing → заявки</h3>
+              <p style="margin:0; color:var(--muted); line-height:1.65;">
+                Поставили чіткий оффер, акценти на довіру, блоки з процесом та FAQ — і отримали
+                прогнозовано сильний конверсійний результат.
+              </p>
+            </div>
+
+            <div class="kpis">
+              <div class="kpi">
+                <b>+27%</b>
+                <span>конверсія</span>
+              </div>
+              <div class="kpi">
+                <b>-18%</b>
+                <span>вартість ліда</span>
+              </div>
+              <div class="kpi">
+                <b>3 дні</b>
+                <span>до запуску</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <section id="process" class="section">
       <div class="container">
         <div class="head reveal">
-          <h2>Як це зроблено</h2>
-          <p>Коротко по кроках — щоб було зрозуміло, що тут відбувається.</p>
+          <div>
+            <h2>Як ми робимо</h2>
+            <p>Простий процес з 3 кроків — зрозуміло і по-людськи.</p>
+          </div>
         </div>
 
         <ol class="steps">
           <li class="step reveal">
             <div class="step-num">1</div>
             <div class="step-body">
-              <h3>Структура</h3>
-              <p>Hero, переваги, процес, FAQ, контакти — все базове на місці.</p>
+              <h3>Офер + структура</h3>
+              <p>Що продаємо, кому, чому довіряти. Далі — блоки в правильному порядку.</p>
             </div>
           </li>
           <li class="step reveal">
             <div class="step-num">2</div>
             <div class="step-body">
-              <h3>Стилі</h3>
-              <p>Скляні блоки, градієнти, чисті відступи, типографіка.</p>
+              <h3>Дизайн + тексти</h3>
+              <p>Типографіка, акценти, CTA. Сайт має вести користувача до дії.</p>
             </div>
           </li>
           <li class="step reveal">
             <div class="step-num">3</div>
             <div class="step-body">
-              <h3>JS-деталі</h3>
-              <p>Мобільне меню, reveal-анімації, toast-повідомлення.</p>
+              <h3>Запуск + дрібні правки</h3>
+              <p>Підключаємо аналітику, перевіряємо мобільну версію, докручуємо деталі.</p>
             </div>
           </li>
         </ol>
       </div>
     </section>
 
+    <section id="pricing" class="section">
+      <div class="container">
+        <div class="head reveal">
+          <div>
+            <h2>Пакети</h2>
+            <p>Тут — просто приклад блоку. Заміни назви/ціни/описи під себе.</p>
+          </div>
+        </div>
+
+        <div class="pricing">
+          <article class="price reveal">
+            <span class="badge">Start</span>
+            <h3>Лайт</h3>
+            <div class="money">$99 <small>одноразово</small></div>
+            <ul class="list">
+              <li>1 сторінка</li>
+              <li>Базові блоки</li>
+              <li>Адаптив</li>
+            </ul>
+            <a class="btn ghost" href="#contact">Обрати</a>
+          </article>
+
+          <article class="price best reveal">
+            <span class="badge">Best choice</span>
+            <h3>Pro</h3>
+            <div class="money">$199 <small>одноразово</small></div>
+            <ul class="list">
+              <li>Повний дизайн як тут</li>
+              <li>UX дрібниці + анімації</li>
+              <li>Структура під конверсію</li>
+            </ul>
+            <a class="btn" href="#contact">Обрати</a>
+          </article>
+
+          <article class="price reveal">
+            <span class="badge">Plus</span>
+            <h3>Max</h3>
+            <div class="money">$399 <small>одноразово</small></div>
+            <ul class="list">
+              <li>Додаткові секції</li>
+              <li>Підключення форми (вебхук)</li>
+              <li>Мінімальна SEO-розмітка</li>
+            </ul>
+            <a class="btn ghost" href="#contact">Обрати</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="faq" class="section">
       <div class="container">
         <div class="head reveal">
-          <h2>FAQ</h2>
-          <p>Типові питання, які зазвичай питають.</p>
+          <div>
+            <h2>FAQ</h2>
+            <p>Питання, які найчастіше задають перед запуском.</p>
+          </div>
         </div>
 
         <div class="faq">
           <details class="reveal">
-            <summary>Це можна залити на GitHub Pages?</summary>
-            <p>Так. Просто завантаж цей один HTML-файл у репозиторій і увімкни GitHub Pages.</p>
+            <summary>Це реально один файл?</summary>
+            <p>Так. Тут весь HTML + CSS + JS в одному документі. Зберігаєш як <b>index.html</b> — готово.</p>
           </details>
           <details class="reveal">
-            <summary>Можна змінити текст/кольори?</summary>
-            <p>Так. Текст — прямо в HTML, кольори — у змінних на початку CSS (у цьому файлі).</p>
+            <summary>Можна залити на GitHub Pages?</summary>
+            <p>Так. Створи репозиторій, додай цей файл, увімкни Pages (Branch: main / root) — і маєш сайт.</p>
           </details>
           <details class="reveal">
-            <summary>Форма реально щось відправляє?</summary>
-            <p>Це демо: показує повідомлення “успішно”. Якщо захочеш — підключиш вебхук/форм-сервіс.</p>
+            <summary>Як зробити форму “справжньою”?</summary>
+            <p>Найпростіше: підключити вебхук (Make / Zapier / n8n / власний endpoint) і відправляти fetch-запит.</p>
           </details>
         </div>
       </div>
@@ -784,7 +1079,10 @@
         <div class="contact reveal">
           <div>
             <h2>Контакти</h2>
-            <p>Залиш дані — і можна швидко адаптувати цей шаблон під твій проєкт.</p>
+            <p>
+              Залиш дані — і я підкажу, які блоки/офер зробити під твій бізнес або проект.
+              (Зараз форма демо — показує “успішно”.)
+            </p>
           </div>
 
           <form class="form" id="contactForm">
@@ -792,14 +1090,17 @@
               Ім’я
               <input name="name" placeholder="Напр. Станіслав" required />
             </label>
+
             <label>
               Телеграм/Email
               <input name="contact" placeholder="@username або email" required />
             </label>
+
             <label>
               Коротко про задачу
               <textarea name="msg" rows="3" placeholder="Що саме треба на сайті?"></textarea>
             </label>
+
             <button class="btn" type="submit">Надіслати</button>
             <div class="fineprint">Демо-форма: дані нікуди не відправляються.</div>
           </form>
@@ -883,6 +1184,66 @@
       e.preventDefault();
       showToast("Форма відправлена (демо) ✅");
       form.reset();
+    });
+
+    // Scroll progress
+    const progress = document.getElementById("progress");
+    function updateProgress(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const height = doc.scrollHeight - doc.clientHeight;
+      const pct = height > 0 ? (scrollTop / height) * 100 : 0;
+      progress.style.width = pct.toFixed(2) + "%";
+    }
+    window.addEventListener("scroll", updateProgress, { passive:true });
+    updateProgress();
+
+    // Scroll spy (active nav)
+    const spyLinks = Array.from(document.querySelectorAll('[data-spy]'));
+    const sections = spyLinks
+      .map(a => document.getElementById(a.getAttribute("data-spy")))
+      .filter(Boolean);
+
+    const spyObserver = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting).sort((a,b)=> b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      const id = visible.target.id;
+      spyLinks.forEach(a => a.classList.toggle("active", a.getAttribute("data-spy") === id));
+    }, { threshold: [0.2, 0.35, 0.5] });
+
+    sections.forEach(s => spyObserver.observe(s));
+
+    // Theme toggle (background variant)
+    const themeBtn = document.getElementById("themeBtn");
+    let alt = false;
+    themeBtn?.addEventListener("click", () => {
+      alt = !alt;
+      if (alt){
+        document.body.style.background =
+          "radial-gradient(1200px 600px at 20% 10%, rgba(245,158,11,.14), transparent 55%)," +
+          "radial-gradient(1200px 600px at 85% 25%, rgba(139,92,246,.16), transparent 55%)," +
+          "radial-gradient(1200px 600px at 70% 95%, rgba(6,182,212,.12), transparent 55%)," +
+          "linear-gradient(180deg, #050812, #0A0F1B)";
+        showToast("Фон змінено ✨");
+      } else {
+        document.body.style.background = "";
+        showToast("Фон повернуто ✅");
+      }
+    });
+
+    // Copy for case block
+    const copyBtn = document.getElementById("copyBtn");
+    copyBtn?.addEventListener("click", async () => {
+      const text =
+        "Кейс: запуск landing → заявки.\n" +
+        "Що зробили: оффер + структура, блоки довіри, FAQ, CTA.\n" +
+        "Результат: +27% конверсія, -18% вартість ліда, запуск за 3 дні.";
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("Текст скопійовано ✅");
+      } catch(e){
+        showToast("Не вдалось скопіювати 😅");
+      }
     });
   </script>
 </body>
